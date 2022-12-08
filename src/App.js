@@ -15,11 +15,11 @@ export function App() {
             text: '2'
         },
         {
-            author:'Booba',
+            author:'Giga',
             text: '3'
         },
         {
-            author:'Baaba',
+            author:'Goga',
             text: '4'
         },
     ])
