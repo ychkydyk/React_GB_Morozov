@@ -28,7 +28,7 @@ export function App() {
 
     return (
         <>
-            <h1 style={{color: 'darkgreen'}}>Welcome to chat!</h1>
+            <h1 style={{color: 'darkgreen'}}>Welcome to chat!!!</h1>
             <Form addMessage={addMessage}/>
             <MessageList messages={messages}/>
         </>
