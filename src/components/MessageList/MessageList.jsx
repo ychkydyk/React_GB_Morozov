@@ -5,8 +5,8 @@ export function MessageList({messages}) {
         <>
             <h1 style={{color: 'darkgreen'}}>MessageList</h1>
             <ul>
-                {messages.map((item) => (
-                    <li>{item}</li>
+                {messages.map((item,idx) => (
+                    <li key={idx}>{item.author}:{item.text}</li>
                 ))}
             </ul>
 

@@ -7,7 +7,10 @@ export function Form({addMessage}) {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        addMessage(text)
+        addMessage({
+            author: 'Me',
+            text: text
+        })
         setText('')
     }
 
