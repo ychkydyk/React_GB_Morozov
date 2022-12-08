@@ -11,7 +11,7 @@ export function App() {
         setMessages([...messages, newMessage])
     }
     useEffect(()=>{
-        if (messages.length > 0) {
+        if (messages.length > 0 && messages[messages.length -1].author === 'Me') {
            const timeout = setTimeout(() => {
                 addMessage({
                     author: 'bot',
