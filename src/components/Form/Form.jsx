@@ -2,12 +2,15 @@
 import {useState} from "react";
 import {Button} from "../ui/Button";
 
-export function Form(props) {
+export function Form({addMessage}) {
     const [text, setText] = useState('')
+
     const handleSubmit = (event) => {
         event.preventDefault()
+        addMessage(text)
         setText('')
     }
+
     return (
         <>
             <h1 style={{color: 'darkgreen'}}>Form</h1>
