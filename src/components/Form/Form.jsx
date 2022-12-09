@@ -1,6 +1,7 @@
 
 import {useState} from "react";
-import {Button} from "../ui/Button";
+import UIButton from '@mui/material/Button';
+import UITextField from '@mui/material/TextField';
 
 export function Form({addMessage}) {
     const [text, setText] = useState('')
@@ -18,11 +19,23 @@ export function Form({addMessage}) {
         <>
             <h1 style={{color: 'darkgreen'}}>Form</h1>
             <form onSubmit={handleSubmit}>
-                <input
+                <UITextField
                     type="text"
                     value={text}
-                    onChange={(event) => setText(event.target.value)}/>
-                <Button type="submit">SEND</Button>
+                    onChange={(event) => setText(event.target.value)}
+                    id="standard-basic"
+                    label="Send message"
+                    variant="standard"
+                />
+
+                <UIButton
+                    type="submit"
+                    variant="contained"
+                    color="success"
+                    size="small"
+                >SEND
+                </UIButton>
+
             </form>
         </>
     )
