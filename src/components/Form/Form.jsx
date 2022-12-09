@@ -14,7 +14,7 @@ export function Form({addMessage}) {
         })
         setText('')
     }
-
+ //todo (make focused input using refs)
     return (
         <>
             <h1 style={{color: 'darkgreen'}}>Form</h1>
