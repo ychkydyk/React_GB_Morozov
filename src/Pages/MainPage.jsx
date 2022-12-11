@@ -7,8 +7,6 @@ import * as React from 'react';
 
 ;
 
-
-
 export function MainPage () {
 
     const [theme, setTheme] = useState('light');
@@ -21,6 +19,7 @@ export function MainPage () {
             <GlobalStyle/>
             <>
                 <button onClick={themeToggler}>Switch Theme</button>
+                <h1>Main Page</h1>
             </>
         </ThemeProvider>
     )
