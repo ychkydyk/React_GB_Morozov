@@ -19,7 +19,6 @@ export function App() {
                     </Route>
                     <Route path="profile" element={<ProfilePage />}></Route>
                 </Route>
-
                 <Route path="*" element={<h2>404 error</h2>}/>
             </Routes>
         </>

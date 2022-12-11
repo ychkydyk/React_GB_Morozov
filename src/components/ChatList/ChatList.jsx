@@ -1,7 +1,7 @@
 export function ChatList() {
     return (
         <>
-            <h1>ChatList</h1>
+            <h1>Chat List</h1>
         </>
     )
 }

@@ -1,4 +1,5 @@
 import {MessageList} from "../components/MessageList/MessageList";
+
 import {Form} from "../components/Form/Form";
 import {useEffect, useState} from "react";
 
@@ -8,6 +9,7 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import {ChatList} from "../components/ChatList/ChatList";
 
 
 
@@ -46,7 +48,7 @@ export function ChatsPage () {
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={3}>
-                            <Item>Список чатов</Item>
+                            <Item><ChatList /></Item>
                         </Grid>
                         <Grid item xs={9}>
                             <Item>
