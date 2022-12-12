@@ -1,9 +1,9 @@
 import {MessageList} from "../components/MessageList/MessageList";
 
 import {Form} from "../components/Form/Form";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {useParams, Navigate} from "react-router-dom";
-
+import { AUTHOR } from '../constants'
 
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
@@ -29,33 +29,33 @@ export function ChatsPage ({onAddChat, onAddMessage, messages, chats}) {
     useEffect(() => {
         if (chatId &&
             messages[chatId]?.length > 0 &&
-            messages[chatId][messages[chatId].length - 1].author === 'Me'
+            messages[chatId][messages[chatId].length - 1].author === AUTHOR.user
         ) {
             const timeout = setTimeout(() => {
                 onAddMessage(chatId, {
-                    author: 'bot',
-                    text: 'Отъебись!'
+                    author: AUTHOR.bot,
+                    text: 'Отстань!'
                 })
             }, 1500)
 
             return () => {
                 clearTimeout(timeout)
             }
-        }
+        } // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [chatId, messages])
 
-    const handleAddMessage = (message) => {
+    const handleAddMessage = (massage) => {
         if (chatId) {
-            onAddMessage(chatId, message)
+            onAddMessage(chatId, massage)
         }
     }
 
-if(chatId && !messages[chatId]) {
-    return <Navigate to="/chats" replace />
-}
+    if(chatId && !messages[chatId]) {
+        return <Navigate to="/chats" replace />
+    }
     return (
             <>
-                <Box sx={{ flexGrow: 1 }}>
+                <Box  sx={{ flexGrow: 1 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={3}>
                             <Item>
@@ -64,9 +64,9 @@ if(chatId && !messages[chatId]) {
                         </Grid>
                         <Grid item xs={9}>
                             <Item>
-                                <h1 style={{color: 'darkgreen'}}>Welcome to chat!!!</h1>
+                                <h1 >Welcome to chat!!!</h1>
                                 <Form addMessage={handleAddMessage}/>
-                                <MessageList messages={chatId ? messages[chatId] : []}/>
+                                <MessageList messages={chatId ? messages[chatId] : []} />
                             </Item>
                         </Grid>
                     </Grid>

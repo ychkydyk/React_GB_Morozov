@@ -1,6 +1,6 @@
-
 import {useState} from "react";
 import UIButton from '@mui/material/Button';
+import { AUTHOR } from '../../constants'
 import UITextField from '@mui/material/TextField';
 
 export function Form({addMessage}) {
@@ -9,7 +9,7 @@ export function Form({addMessage}) {
     const handleSubmit = (event) => {
         event.preventDefault()
         addMessage({
-            author: 'Me',
+            author: AUTHOR.user,
             text: text
         })
         setText('')
@@ -17,7 +17,7 @@ export function Form({addMessage}) {
  //todo (make focused input using refs)
     return (
         <>
-            <h1 style={{color: 'darkgreen'}}>Form</h1>
+            <h1>Form</h1>
             <form onSubmit={handleSubmit}>
                 <UITextField
                     type="text"

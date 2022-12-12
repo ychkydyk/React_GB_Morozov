@@ -2,6 +2,8 @@ import styles from './NavBar.module.css'
 
 import { Outlet, NavLink } from "react-router-dom";
 
+import * as React from "react";
+
 export const navigate = [
     {
         id:1,

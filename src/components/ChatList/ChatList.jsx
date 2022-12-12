@@ -1,6 +1,8 @@
 import { nanoid } from 'nanoid';
 import { useState} from "react";
 import { Link } from "react-router-dom";
+import UIButton from "@mui/material/Button";
+
 
 export function ChatList({onAddChat, chats}) {
     const [value, setValue] = useState('')
@@ -36,7 +38,12 @@ export function ChatList({onAddChat, chats}) {
                     value={value}
                     onChange={handleChange}
                 />
-                <button type="submit">Create Chat</button>
+                <UIButton  type="submit"
+                           variant="contained"
+                           color="success"
+                           size="small"
+                >Create Chat
+                </UIButton>
             </form>
         </>
     )
