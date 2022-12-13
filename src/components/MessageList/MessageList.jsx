@@ -1,15 +1,18 @@
 
 
-export function MessageList({messages}) {
+export function MessageList ({messages}) {
+    console.log('messages', messages)
     return (
         <>
-            <h1 style={{color: 'darkgreen'}}>MessageList</h1>
+            <h1>MessageList</h1>
             <ul>
-                {messages.map((item,idx) => (
-                    <li key={idx}>{item.author}:{item.text}</li>
+                {messages.map((message, index) => (
+                    <li key={index}>
+                        {message.author} : {message.text}
+                    </li>
                 ))}
             </ul>
-
         </>
     )
 }
+
