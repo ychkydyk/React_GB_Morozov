@@ -3,6 +3,7 @@ import UIButton from '@mui/material/Button';
 import { AUTHOR } from '../../constants'
 import UITextField from '@mui/material/TextField';
 
+
 export function Form({addMessage}) {
     const [text, setText] = useState('')
 
@@ -17,7 +18,7 @@ export function Form({addMessage}) {
  //todo (make focused input using refs)
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form  onSubmit={handleSubmit}>
                 <UITextField
                     type="text"
                     value={text}

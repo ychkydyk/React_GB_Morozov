@@ -13,6 +13,9 @@ import { darkTheme, lightTheme, GlobalStyles } from "./theme";
 import "./index.css";
 import UIButton from "@mui/material/Button";
 
+import { Provider } from 'react-redux'
+import { store } from './store'
+
 
 
 
@@ -58,9 +61,11 @@ export function App() { //тема
     }
 
     return (
+
         <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
             <GlobalStyles />
-        <div className="App">
+        <>
+            <Provider store={store}>
             <UIButton onClick={switchTheme}>Switch Theme</UIButton>
             <Routes>
                 <Route path='/' element={<NavBar />} >
@@ -80,7 +85,9 @@ export function App() { //тема
                 </Route>
                 <Route path="*" element={<h2>404 Page not FOUND</h2>} />
             </Routes>
-        </div>
+            </Provider>
+        </>
         </ThemeProvider>
+
     )
 }

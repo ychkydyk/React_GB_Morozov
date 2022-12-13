@@ -9,7 +9,8 @@ export const darkTheme = {
 export const lightTheme = {
     body: "#fff",
     textColor: "#000",
-    headingColor: "#d23669"
+    headingColor: "#d23669",
+
 }
 
 export const GlobalStyles = createGlobalStyle`
@@ -20,5 +21,9 @@ export const GlobalStyles = createGlobalStyle`
  }
  h2{
    color: ${props => props.theme.headingColor};
+ }
+ button {
+ background: ${props => props.theme.body};
+ color: ${props => props.theme.textColor};
  }
 `

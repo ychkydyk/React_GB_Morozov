@@ -22,7 +22,7 @@ export function ChatsPage ({onAddChat, onAddMessage, messages, chats}) {
             const timeout = setTimeout(() => {
                 onAddMessage(chatId, {
                     author: AUTHOR.bot,
-                    text: 'Отстань!'
+                    text: 'Отъебись!'
                 })
             }, 1500)
 
