@@ -61,8 +61,8 @@ export function App() { //тема
         <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
             <GlobalStyles />
         <div className="App">
+            <UIButton onClick={switchTheme}>Switch Theme</UIButton>
             <Routes>
-
                 <Route path='/' element={<NavBar />} >
                     <Route index element={<MainPage />}  />
                     <Route path="profile" element={<ProfilePage />} />
@@ -80,7 +80,6 @@ export function App() { //тема
                 </Route>
                 <Route path="*" element={<h2>404 Page not FOUND</h2>} />
             </Routes>
-            <UIButton onClick={switchTheme}>Switch Theme</UIButton>
         </div>
         </ThemeProvider>
     )

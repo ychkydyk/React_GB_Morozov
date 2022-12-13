@@ -17,7 +17,6 @@ export function Form({addMessage}) {
  //todo (make focused input using refs)
     return (
         <>
-            <h1>Form</h1>
             <form onSubmit={handleSubmit}>
                 <UITextField
                     type="text"
