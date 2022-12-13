@@ -1,3 +1,5 @@
+import * as types from './types'
+
 const initialState = {
     name: 'Biba'
 }
@@ -5,7 +7,7 @@ const initialState = {
 export const profileReducer =(state = initialState, action) => {
     const {type, payload} = action
     switch (type) {
-        case 'Change_Name':
+        case types.Change_Name:
             return {
                 ...state,
                 name: payload

@@ -1,6 +1,7 @@
 import styles from './NavBar.module.css'
 
 import { Outlet, NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import * as React from "react";
 
@@ -24,6 +25,8 @@ export const navigate = [
 
 
 export function NavBar() {
+
+    const name = useSelector((store) => store.name)
     return (
       <>
           <header>
@@ -42,6 +45,7 @@ export function NavBar() {
                           </li>
                       ))}
                   </ul>
+                  <h2>{name}</h2>
               </nav>
           </header>
           <main>
