@@ -1,7 +1,7 @@
 import * as types from './types'
 
 const initialState = {
-    name: 'Biba'
+    name: 'DefaultUser'
 }
 
 export const profileReducer =(state = initialState, action) => {

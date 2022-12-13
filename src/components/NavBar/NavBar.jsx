@@ -45,7 +45,7 @@ export function NavBar() {
                           </li>
                       ))}
                   </ul>
-                  <h2>{name}</h2>
+                  <h3>user: {name}</h3>
               </nav>
           </header>
           <main>
