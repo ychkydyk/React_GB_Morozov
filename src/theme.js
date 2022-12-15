@@ -19,7 +19,7 @@ export const GlobalStyles = createGlobalStyle`
   color: ${props => props.theme.textColor};
   transition: .3s ease;
  }
- h2{
+ h1{
    color: ${props => props.theme.headingColor};
  }
  button {

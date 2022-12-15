@@ -1,8 +1,6 @@
 import {useState} from "react";
 import UIButton from '@mui/material/Button';
 import { AUTHOR } from '../../constants'
-import UITextField from '@mui/material/TextField';
-
 
 export function Form({addMessage}) {
     const [text, setText] = useState('')
@@ -19,15 +17,13 @@ export function Form({addMessage}) {
     return (
         <>
             <form  onSubmit={handleSubmit}>
-                <UITextField
+                <input
                     type="text"
                     value={text}
                     onChange={(event) => setText(event.target.value)}
                     id="standard-basic"
-                    label="Send message"
-                    variant="standard"
+                    placeholder="Send message"
                 />
-
                 <UIButton
                     type="submit"
                     variant="contained"

@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 import * as React from "react";
 
+
 export const navigate = [
     {
         id:1,
@@ -25,7 +26,6 @@ export const navigate = [
 
 
 export function NavBar() {
-
     const name = useSelector((store) => store.name)
     return (
       <>

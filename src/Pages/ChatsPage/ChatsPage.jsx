@@ -1,18 +1,23 @@
-import {MessageList} from "../components/MessageList/MessageList";
+import {MessageList} from "../../components/MessageList/MessageList";
 
-import {Form} from "../components/Form/Form";
+import {Form} from "../../components/Form/Form";
 import {useEffect} from "react";
 import {useParams, Navigate} from "react-router-dom";
-import { AUTHOR } from '../constants'
+import { AUTHOR } from '../../constants'
 
 import * as React from 'react';
-import {ChatList} from "../components/ChatList/ChatList";
+import {ChatList} from "../../components/ChatList/ChatList";
+
+import { WithClasses } from '../../components/HOC/WithClasses'
+import styles from './ChatsPage.module.css'
 
 
 
 export function ChatsPage ({onAddChat, onAddMessage, messages, chats}) {
 
     const {chatId} = useParams()
+
+    const MessagesListWithClass = WithClasses(MessageList)
 
     useEffect(() => {
         if (chatId &&
@@ -44,8 +49,11 @@ export function ChatsPage ({onAddChat, onAddMessage, messages, chats}) {
     return (
             <>
                 <ChatList chats={chats}  onAddChat={onAddChat} />
-                <h1 >Welcome to chat!!!</h1>
-                <MessageList messages={chatId ? messages[chatId] : []} />
+                <h2 >Welcome to chat!!!</h2>
+                <MessagesListWithClass
+                    messages={chatId ? messages[chatId] : []}
+                    classes={styles.border}
+                />
                 <Form addMessage={handleAddMessage}/>
             </>
     )

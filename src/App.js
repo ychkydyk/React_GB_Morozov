@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import { NavBar } from './components/NavBar/NavBar'
 import { MainPage } from "./Pages/MainPage";
-import { ChatsPage } from "./Pages/ChatsPage";
+import { ChatsPage } from "./Pages/ChatsPage/ChatsPage";
 import { ProfilePage } from "./Pages/ProfilePage";
 import { ChatList } from "./components/ChatList/ChatList";
 import {nanoid} from "nanoid";
@@ -13,8 +13,8 @@ import { darkTheme, lightTheme, GlobalStyles } from "./theme";
 import "./index.css";
 import UIButton from "@mui/material/Button";
 
-import { Provider } from 'react-redux'
-import { store } from './store'
+import { Provider } from 'react-redux' // подключаем чтобы обернуть всё наше приложение в redux
+import { store } from './store'         // тоже для работы с redux
 
 
 

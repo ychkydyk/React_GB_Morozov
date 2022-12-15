@@ -7,7 +7,7 @@ import * as types from '../store/profile/types'
 export function ProfilePage() {
     const name = useSelector((store) => store.name )
     const [value, setValue] = useState('')
-    const dispatch = useDispatch()
+    const dispatch = useDispatch() // чтобы обновиить store нужно вызвать метод dispatch,он вызывается у объекта store, из index.js
     const handleChange = () => {
         dispatch({type: types.Change_Name, payload: value})
         setValue('')
