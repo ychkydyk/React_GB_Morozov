@@ -5,7 +5,7 @@ import { AUTHOR } from '../../constants'
 export function Form({addMessage}) {
     const [text, setText] = useState('')
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event) => { //пропсами принимаем addMessage
         event.preventDefault()
         addMessage({
             author: AUTHOR.user,
@@ -31,7 +31,6 @@ export function Form({addMessage}) {
                     size="small"
                 >SEND
                 </UIButton>
-
             </form>
         </>
     )

@@ -1,16 +1,20 @@
-import {useSelector, useDispatch } from "react-redux"; //selector чтобы получить данные из store
+import {useSelector, useDispatch } from "react-redux"; //selector чтобы получить данные из store; dispatch - чтобы запустить reduser
 import {useState} from "react";
-import * as types from '../store/profile/types'
+import {changeName} from '../store/profile/actions'
 
 
 
 export function ProfilePage() {
-    const name = useSelector((store) => store.name )
-    const [value, setValue] = useState('')
-    const dispatch = useDispatch() // чтобы обновиить store нужно вызвать метод dispatch,он вызывается у объекта store, из index.js
+    const name = useSelector((store) => store.name ) // вытаскиваем хуком определенное состояние из Store(в данном случае имя)
+    const [value, setValue] = useState('') // state inputa
+
+    const dispatch = useDispatch() // чтобы обновиить/изменить store нужно вызвать метод dispatchи передать в него action
+    // он вызывается у объекта store из ./store/index.js
+
     const handleChange = () => {
-        dispatch({type: types.Change_Name, payload: value})
-        setValue('')
+        // dispatch({type: types.Change_Name, payload: value}) // передаем action
+        dispatch(changeName(value)) // в диспатч передаем action из store, а в него наш value
+        setValue('') // обнуляем значение
     }
 
     return (

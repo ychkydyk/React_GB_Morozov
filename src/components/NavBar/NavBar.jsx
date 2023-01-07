@@ -1,7 +1,7 @@
 import styles from './NavBar.module.css'
 
 import { Outlet, NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector } from "react-redux"; // иморт для того чтобы вытащить данные ищ Redux State
 
 import * as React from "react";
 
@@ -26,7 +26,7 @@ export const navigate = [
 
 
 export function NavBar() {
-    const name = useSelector((store) => store.name)
+    const name = useSelector((store) => store.name) // присваиваем переменной значение из Redux Store
     return (
       <>
           <header>

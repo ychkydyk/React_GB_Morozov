@@ -37,7 +37,8 @@ export function ChatsPage ({onAddChat, onAddMessage, messages, chats}) {
         } // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [chatId, messages])
 
-    const handleAddMessage = (massage) => {
+    const handleAddMessage = (massage) => { // добавление сообщения длся юзера
+        // на массаж не ругается
         if (chatId) {
             onAddMessage(chatId, massage)
         }

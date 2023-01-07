@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState } from "react"; //хук для использования state
 
 import { NavBar } from './components/NavBar/NavBar'
 import { MainPage } from "./Pages/MainPage";
@@ -16,9 +16,6 @@ import UIButton from "@mui/material/Button";
 import { Provider } from 'react-redux' // подключаем чтобы обернуть всё наше приложение в redux
 import { store } from './store'         // тоже для работы с redux
 
-
-
-
 const defaultMessages = {
     default: [
         {
@@ -32,8 +29,9 @@ const defaultMessages = {
     ]
 }
 
-export function App() { //тема
-    const [theme, setTheme] = useState("light");
+export function App() {
+    //тема
+    const [theme, setTheme] = useState("light"); // usestate принимакт начальное состояние state
     const switchTheme = () => {
         theme === "light" ? setTheme("dark") : setTheme("light");
     };
@@ -45,6 +43,7 @@ export function App() { //тема
         name: chat
     }))
 
+        // функции по добавлению вынесены в App.js, где формируется объект и чаты потом возвращаются
     const onAddChat = (newChat) => {
         console.log('newChat', newChat)
         setMessages({
@@ -53,15 +52,14 @@ export function App() { //тема
         })
     }
 
-    const onAddMessage = (chatId, newMassage) => {
+    const onAddMessage = (chatId, newMessage) => {
         setMessages({
             ...messages,
-            [chatId]: [...messages[chatId], newMassage]
+            [chatId]: [...messages[chatId], newMessage]
         })
     }
-
+// index в route означает, что при гравно урле отрисуется MainPage
     return (
-
         <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
             <GlobalStyles />
         <>
@@ -73,9 +71,7 @@ export function App() { //тема
                     <Route path="profile" element={<ProfilePage />} />
                     <Route path="chats">
                         <Route index element={<ChatList chats={chats} onAddChat={onAddChat} />} />
-                        <Route
-                            path=":chatId"
-                            element={<ChatsPage
+                        <Route path=":chatId" element={<ChatsPage
                                 chats={chats}
                                 messages={messages}
                                 onAddMessage={onAddMessage}
@@ -88,6 +84,5 @@ export function App() { //тема
             </Provider>
         </>
         </ThemeProvider>
-
     )
 }
