@@ -2,7 +2,8 @@ import * as types from './types'
 //в этом файле описывает редюсеры, отвечающие за отрисовку состояния. в зависимости от action'a - изменяющие наш Store
 // initialState это глобальное, начальное состояние нашего store, можно вынести в отдельный файл
 const initialState = {
-    name: 'DefaultUser'
+    name: 'DefaultUser',
+    visible: true
 }
     // reducer - чистая функция, отвечающая за состояние state в зависимости от action'a
 export const profileReducer =(state = initialState, action) => {
@@ -12,9 +13,14 @@ export const profileReducer =(state = initialState, action) => {
     switch (type) {                 // action это объект {type: 'action1', value:'здесь значение поля формы'  часто вместо него payload}
         case types.Change_Name:
             return {
-                ...state, // предыдущее состояние state
+                ...state,
                 name: payload
             }
+                case types.TOGGLE_PROFILE:
+                    return {
+                        ...state,
+                        visible: !state.visible
+                    }
         default:
             return state // если не один из тайпов не подходит, то по дэфолту должен всегда возвращать state,
     }

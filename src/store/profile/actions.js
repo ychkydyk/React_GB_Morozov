@@ -7,3 +7,10 @@ export const changeName = (data) => ({ // data это payload(можно люб�
         payload: data
     }
 )
+
+
+export const toggleProfile = () => ({
+        type: types.TOGGLE_PROFILE
+
+    }
+)

@@ -1,11 +1,13 @@
 import {useSelector, useDispatch } from "react-redux"; //selector чтобы получить данные из store; dispatch - чтобы запустить reduser
 import {useState} from "react";
-import {changeName} from '../store/profile/actions'
+import {changeName, toggleProfile} from '../store/profile/actions'
+import {selectName, selectVisible} from "../store/profile/selectors";
 
 
 
 export function ProfilePage() {
-    const name = useSelector((store) => store.name ) // вытаскиваем хуком определенное состояние из Store(в данном случае имя)
+    const name = useSelector(selectName) // вытаскиваем хуком определенное состояние из Store(в данном случае имя)
+    const visible = useSelector(selectVisible)
     const [value, setValue] = useState('') // state inputa
 
     const dispatch = useDispatch() // чтобы обновиить/изменить store нужно вызвать метод dispatchи передать в него action
@@ -21,6 +23,8 @@ export function ProfilePage() {
         <>
             <h1>Profile Page</h1>
             <h2>{name}</h2>
+            <input type="checkbox" checked={visible} readOnly/>
+            <button onClick={() => dispatch(toggleProfile())}>Change visible</button>
             <input
                 type="text"
                 value={value}

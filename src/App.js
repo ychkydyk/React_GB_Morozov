@@ -6,7 +6,7 @@ import { MainPage } from "./Pages/MainPage";
 import { ChatsPage } from "./Pages/ChatsPage/ChatsPage";
 import { ProfilePage } from "./Pages/ProfilePage";
 import { ChatList } from "./components/ChatList/ChatList";
-import {nanoid} from "nanoid";
+
 
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme, GlobalStyles } from "./theme";
@@ -16,18 +16,18 @@ import UIButton from "@mui/material/Button";
 import { Provider } from 'react-redux' // подключаем чтобы обернуть всё наше приложение в redux
 import { store } from './store'         // тоже для работы с redux
 
-const defaultMessages = {
-    default: [
-        {
-            author: 'GreetingsBot',
-            text: 'Приветствую!'
-        },
-        {
-            author: 'GreetingsBot',
-            text: 'Напиши мне!'
-        },
-    ]
-}
+// const defaultMessages = {
+//     default: [
+//         {
+//             author: 'GreetingsBot',
+//             text: 'Приветствую!'
+//         },
+//         {
+//             author: 'GreetingsBot',
+//             text: 'Напиши мне!'
+//         },
+//     ]
+// }
 
 export function App() {
     //тема
@@ -36,28 +36,28 @@ export function App() {
         theme === "light" ? setTheme("dark") : setTheme("light");
     };
 
-    const [messages, setMessages] = useState(defaultMessages)
+    // const [messages, setMessages] = useState(defaultMessages)
 
-    const chats = Object.keys(messages).map((chat) => ({
-        id: nanoid(),
-        name: chat
-    }))
+    // const chats = Object.keys(messages).map((chat) => ({
+    //     id: nanoid(),
+    //     name: chat
+    // }))
 
         // функции по добавлению вынесены в App.js, где формируется объект и чаты потом возвращаются
-    const onAddChat = (newChat) => {
-        console.log('newChat', newChat)
-        setMessages({
-            ...messages,
-            [newChat.name]: []
-        })
-    }
+    // const onAddChat = (newChat) => {
+    //     console.log('newChat', newChat)
+    //     setMessages({
+    //         ...messages,
+    //         [newChat.name]: []
+    //     })
+    // }
 
-    const onAddMessage = (chatId, newMessage) => {
-        setMessages({
-            ...messages,
-            [chatId]: [...messages[chatId], newMessage]
-        })
-    }
+    // const onAddMessage = (chatId, newMessage) => {
+    //     setMessages({
+    //         ...messages,
+    //         [chatId]: [...messages[chatId], newMessage]
+    //     })
+    // }
 // index в route означает, что при гравно урле отрисуется MainPage
     return (
         <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
@@ -70,12 +70,8 @@ export function App() {
                     <Route index element={<MainPage />}  />
                     <Route path="profile" element={<ProfilePage />} />
                     <Route path="chats">
-                        <Route index element={<ChatList chats={chats} onAddChat={onAddChat} />} />
-                        <Route path=":chatId" element={<ChatsPage
-                                chats={chats}
-                                messages={messages}
-                                onAddMessage={onAddMessage}
-                                onAddChat={onAddChat} />}
+                        <Route index element={<ChatList  />} />
+                        <Route path=":chatId" element={<ChatsPage />}
                         />
                     </Route>
                 </Route>
