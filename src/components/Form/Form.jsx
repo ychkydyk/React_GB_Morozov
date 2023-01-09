@@ -2,8 +2,9 @@ import {useState} from "react";
 import UIButton from '@mui/material/Button';
 
 import {useDispatch} from "react-redux";
-import {addMessage} from "../../store/messages/actions";
+import { addMessageWithReply} from "../../store/messages/actions";
 import {useParams} from "react-router-dom";
+import {AUTHOR} from "../../constants";
 
 
 export function Form() {
@@ -11,13 +12,12 @@ export function Form() {
     const dispatch = useDispatch()
     const {chatId} = useParams()
 
-    const handleSubmit = (event) => { //пропсами принимаем addMessage
+    const handleSubmit = (event) => {
         event.preventDefault()
-        // addMessage({
-        //     author: AUTHOR.user,
-        //     text: text
-        // })
-        dispatch(addMessage(chatId, text))
+        dispatch(addMessageWithReply(chatId, {
+            author: AUTHOR.user,
+            text
+        }))
         setText('')
     }
  //todo (make focused input using refs)

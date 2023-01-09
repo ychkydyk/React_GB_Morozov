@@ -1,4 +1,5 @@
 import * as types from "./types";
+import {AUTHOR} from "../../constants";
 
 
 export const addChat = (newChat) => ({
@@ -18,6 +19,24 @@ export const addMessage = (chatName, text) => ({
         payload: {chatName, text}
     }
 )
+let timeout
+export const addMessageWithReply = (chatName, message) =>(dispatch) => {
+    dispatch(addMessage(chatName, message))
+
+    if(message.author !== AUTHOR.bot) {
+        if (timeout) {
+            clearTimeout(timeout)
+        }
+
+        timeout = setTimeout(()=>{
+            dispatch(addMessage(chatName, {
+                author: AUTHOR.bot,
+                text: 'New script bot'
+            }))
+        }, 1000)
+    }
+}
+
 
 
 

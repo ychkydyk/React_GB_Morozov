@@ -1,33 +1,25 @@
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react"; //хук для использования state
+import { Provider } from 'react-redux' // подключаем чтобы обернуть всё наше приложение в redux
+import { PersistGate } from 'redux-persist/integration/react'
+import { store, persistor } from './store'
+import "./index.css";
 
 import { NavBar } from './components/NavBar/NavBar'
 import { MainPage } from "./Pages/MainPage";
 import { ChatsPage } from "./Pages/ChatsPage/ChatsPage";
 import { ProfilePage } from "./Pages/ProfilePage";
+import { AboutWithConnect } from "./Pages/AboutPage";
 import { ChatList } from "./components/ChatList/ChatList";
-
+import UIButton from "@mui/material/Button";
 
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme, GlobalStyles } from "./theme";
-import "./index.css";
-import UIButton from "@mui/material/Button";
+import {NewsPage} from "./Pages/NewsPage";
+import {SingIn} from "./Pages/SingIn";
+import {SignUp} from "./Pages/SignUp";
 
-import { Provider } from 'react-redux' // подключаем чтобы обернуть всё наше приложение в redux
-import { store } from './store'         // тоже для работы с redux
 
-// const defaultMessages = {
-//     default: [
-//         {
-//             author: 'GreetingsBot',
-//             text: 'Приветствую!'
-//         },
-//         {
-//             author: 'GreetingsBot',
-//             text: 'Напиши мне!'
-//         },
-//     ]
-// }
 
 export function App() {
     //тема
@@ -36,39 +28,22 @@ export function App() {
         theme === "light" ? setTheme("dark") : setTheme("light");
     };
 
-    // const [messages, setMessages] = useState(defaultMessages)
-
-    // const chats = Object.keys(messages).map((chat) => ({
-    //     id: nanoid(),
-    //     name: chat
-    // }))
-
-        // функции по добавлению вынесены в App.js, где формируется объект и чаты потом возвращаются
-    // const onAddChat = (newChat) => {
-    //     console.log('newChat', newChat)
-    //     setMessages({
-    //         ...messages,
-    //         [newChat.name]: []
-    //     })
-    // }
-
-    // const onAddMessage = (chatId, newMessage) => {
-    //     setMessages({
-    //         ...messages,
-    //         [chatId]: [...messages[chatId], newMessage]
-    //     })
-    // }
 // index в route означает, что при гравно урле отрисуется MainPage
     return (
         <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
             <GlobalStyles />
         <>
             <Provider store={store}>
+                <PersistGate persistor={persistor}>
             <UIButton onClick={switchTheme}>Switch Theme</UIButton>
             <Routes>
                 <Route path='/' element={<NavBar />} >
                     <Route index element={<MainPage />}  />
                     <Route path="profile" element={<ProfilePage />} />
+                    <Route path="news" element={<NewsPage />} />
+                    <Route path="about" element={<AboutWithConnect />} />
+                    <Route path="singin" element={<SingIn />} />
+                    <Route path="signup" element={<SignUp />} />
                     <Route path="chats">
                         <Route index element={<ChatList  />} />
                         <Route path=":chatId" element={<ChatsPage />}
@@ -77,6 +52,7 @@ export function App() {
                 </Route>
                 <Route path="*" element={<h2>404 Page not FOUND</h2>} />
             </Routes>
+                </PersistGate>
             </Provider>
         </>
         </ThemeProvider>

@@ -14,3 +14,8 @@ export const toggleProfile = () => ({
 
     }
 )
+
+export const auth = (auth) => ({
+    type: types.IS_AUTH,
+    payload: auth
+})

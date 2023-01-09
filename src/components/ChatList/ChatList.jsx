@@ -13,10 +13,6 @@ export function ChatList({onAddChat}) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // onAddChat({
-        //     id: nanoid(),
-        //     name: value
-        // })
         dispatch(addChat(value))
     }
 

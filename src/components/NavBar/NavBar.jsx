@@ -5,7 +5,6 @@ import { useSelector } from "react-redux"; // иморт для того что�
 
 import * as React from "react";
 
-
 export const navigate = [
     {
         id:1,
@@ -21,12 +20,31 @@ export const navigate = [
         id:3,
         name: 'Profile',
         to: '/profile'
-    }
+    },
+    {
+    id:4,
+    name: 'About',
+    to: '/about'
+    },
+    {
+        id:5,
+        name: 'News',
+        to: '/news'
+    },
+    {
+        id: 6,
+        name: 'SingIn',
+        to: '/singin'
+    },
+    {
+        id: 7,
+        name: 'SignUp',
+        to: '/signup'
+    },
 ]
 
-
 export function NavBar() {
-    const name = useSelector((store) => store.name) // присваиваем переменной значение из Redux Store
+    const name = useSelector((state) => state.profile.name) // присваиваем переменной значение из Redux Store
     return (
       <>
           <header>
