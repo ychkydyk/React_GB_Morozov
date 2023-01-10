@@ -20,3 +20,6 @@ ul li {
   list-style-type: none;
 }
 
+.header {
+  max-width: 100%;
+}

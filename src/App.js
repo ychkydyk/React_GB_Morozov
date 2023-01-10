@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import { useState } from "react"; //хук для использования state
-import { Provider } from 'react-redux' // подключаем чтобы обернуть всё наше приложение в redux
+import {useEffect, useState} from "react"; //хук для использования state
+import { useDispatch} from 'react-redux' // подключаем чтобы обернуть всё наше приложение в redux
 import { PersistGate } from 'redux-persist/integration/react'
-import { store, persistor } from './store'
+import { persistor } from './store'
 import "./index.css";
 
 import { NavBar } from './components/NavBar/NavBar'
@@ -18,22 +18,37 @@ import { darkTheme, lightTheme, GlobalStyles } from "./theme";
 import {NewsPage} from "./Pages/NewsPage";
 import {SingIn} from "./Pages/SingIn";
 import {SignUp} from "./Pages/SignUp";
+import {PrivateRoute} from "./authRoute/PriviteRoute";
+import {firebaseAuth} from "./services/firebase";
+import {auth} from "./store/profile/actions";
 
 
 
 export function App() {
+    const dispatch = useDispatch()
     //тема
     const [theme, setTheme] = useState("light"); // usestate принимакт начальное состояние state
     const switchTheme = () => {
         theme === "light" ? setTheme("dark") : setTheme("light");
     };
 
+    useEffect(() => {
+        const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
+            if (user) {
+                dispatch(auth(true))
+            } else {
+                dispatch(auth(false))
+            }
+        })
+        return unsubscribe
+    }, [])
+
 // index в route означает, что при гравно урле отрисуется MainPage
     return (
         <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
             <GlobalStyles />
         <>
-            <Provider store={store}>
+
                 <PersistGate persistor={persistor}>
             <UIButton onClick={switchTheme}>Switch Theme</UIButton>
             <Routes>
@@ -42,18 +57,28 @@ export function App() {
                     <Route path="profile" element={<ProfilePage />} />
                     <Route path="news" element={<NewsPage />} />
                     <Route path="about" element={<AboutWithConnect />} />
-                    <Route path="singin" element={<SingIn />} />
-                    <Route path="signup" element={<SignUp />} />
-                    <Route path="chats">
-                        <Route index element={<ChatList  />} />
-                        <Route path=":chatId" element={<ChatsPage />}
+                    <Route path="login" element={<SingIn />} />
+                    <Route path="logout" element={<SignUp />} />
+                    <Route path="chats" element={<PrivateRoute />}>
+                        <Route
+                            index
+                            element={<ChatList/>}
+                        />
+                        <Route
+                            path=":chatId"
+                            element={<ChatsPage />}
                         />
                     </Route>
+                    {/*<Route path="chats">*/}
+                    {/*    <Route index element={<ChatList  />} />*/}
+                    {/*    <Route path=":chatId" element={<ChatsPage />}*/}
+                    {/*    />*/}
+                    {/*</Route>*/}
                 </Route>
                 <Route path="*" element={<h2>404 Page not FOUND</h2>} />
             </Routes>
                 </PersistGate>
-            </Provider>
+
         </>
         </ThemeProvider>
     )

@@ -3,10 +3,12 @@ border: 1px solid black;
     margin: 0 auto;
     padding: 10px;
     border-radius: 5px;
+    max-width: 80%;
 
 
 }
 .navbar ul {
+
     display: flex;
     gap: 25px;
     justify-content: center;
