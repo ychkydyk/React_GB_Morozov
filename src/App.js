@@ -11,7 +11,6 @@ import { ChatsPage } from "./Pages/ChatsPage/ChatsPage";
 import { ProfilePage } from "./Pages/ProfilePage";
 import { AboutWithConnect } from "./Pages/AboutPage";
 import { ChatList } from "./components/ChatList/ChatList";
-import UIButton from "@mui/material/Button";
 
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme, GlobalStyles } from "./theme";
@@ -28,7 +27,7 @@ import {PublicRoute} from "./authRoute/PublicRoute";
 export function App() {
     const dispatch = useDispatch()
     //тема
-    const [theme, setTheme] = useState("light"); // usestate принимает начальное состояние state
+    const [theme, setTheme] = useState("light");
     const switchTheme = () => {
         theme === "light" ? setTheme("dark") : setTheme("light");
     };
@@ -52,7 +51,7 @@ export function App() {
                 <PersistGate persistor={persistor}>
 
             <Routes>
-                <Route path='/' element={<NavBar />} >
+                <Route  path='/' element={<NavBar switchTheme={switchTheme} />} >
                     <Route index element={<MainPage />}  />
                     <Route path="profile" element={<ProfilePage />} />
                     <Route path="news" element={<NewsPage />} />
@@ -73,7 +72,6 @@ export function App() {
                 <Route path="*" element={<h2>404 Page not FOUND</h2>} />
             </Routes>
                 </PersistGate>
-            <UIButton onClick={switchTheme}>Switch Theme</UIButton>
         </>
         </ThemeProvider>
     )

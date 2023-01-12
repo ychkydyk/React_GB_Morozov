@@ -1,3 +1,4 @@
+import { Avatar } from "@mui/material";
 
 
 export function MessageList ({messages}) {
@@ -5,13 +6,17 @@ export function MessageList ({messages}) {
     return (
         <>
             <h1>MessageList</h1>
+
             <ul>
                 {messages.map((message, index) => (
-                    <li key={index}>
+                    <li avatar={<Avatar>KS</Avatar>} key={index}>
                         {message.author} : {message.text}
                     </li>
                 ))}
+
             </ul>
+
+
         </>
     )
 }

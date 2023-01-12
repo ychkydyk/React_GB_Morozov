@@ -6,6 +6,7 @@ import { useSelector } from "react-redux"; // иморт для того что�
 
 import {logOut} from "../../services/firebase";
 import Button from "@mui/material/Button";
+import UIButton from "@mui/material/Button";
 
 export const navigates = [
     {
@@ -36,7 +37,7 @@ export const navigates = [
 
 ]
 
-export function NavBar() {
+export function NavBar({switchTheme}) {
     const navigate = useNavigate()
 
     const name = useSelector((store) => store.profile.name)
@@ -82,6 +83,8 @@ export function NavBar() {
                         </>
                     )}
                     <p>user: {name}</p>
+                    <p>'🌞' : '🌙'</p>
+                    <UIButton onClick={switchTheme}>Switch theme</UIButton>
                 </nav>
             </header>
             <main>
