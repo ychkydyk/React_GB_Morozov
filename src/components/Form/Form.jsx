@@ -1,28 +1,43 @@
-
 import {useState} from "react";
-import {Button} from "../ui/Button";
+import UIButton from '@mui/material/Button';
 
-export function Form({addMessage}) {
+import {useDispatch} from "react-redux";
+import { addMessageWithReply} from "../../store/messages/actions";
+import {useParams} from "react-router-dom";
+import {AUTHOR} from "../../constants";
+
+
+export function Form() {
     const [text, setText] = useState('')
+    const dispatch = useDispatch()
+    const {chatId} = useParams()
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        addMessage({
-            author: 'Me',
-            text: text
-        })
+        dispatch(addMessageWithReply(chatId, {
+            author: AUTHOR.user,
+            text
+        }))
         setText('')
     }
-
+ //todo (make focused input using refs)
     return (
         <>
-            <h1 style={{color: 'darkgreen'}}>Form</h1>
-            <form onSubmit={handleSubmit}>
+            <form  onSubmit={handleSubmit}>
                 <input
                     type="text"
                     value={text}
-                    onChange={(event) => setText(event.target.value)}/>
-                <Button type="submit">SEND</Button>
+                    onChange={(event) => setText(event.target.value)}
+                    id="standard-basic"
+                    placeholder="Send message"
+                />
+                <UIButton
+                    type="submit"
+                    variant="contained"
+                    color="success"
+                    size="small"
+                >SEND
+                </UIButton>
             </form>
         </>
     )

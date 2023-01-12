@@ -1,0 +1,19 @@
+
+.navbar ul {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    color: white;
+
+
+}
+.navbar a {
+    text-decoration: none;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 5px;
+}
+.leftbar {
+    display: flex;
+    justify-content: right;
+}

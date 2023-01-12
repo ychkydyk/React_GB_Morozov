@@ -1,38 +1,83 @@
+import { Routes, Route } from "react-router-dom";
+import {useEffect, useState} from "react"; //хук для использования state
+import { useDispatch} from 'react-redux' // подключаем чтобы обернуть всё наше приложение в redux
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistor } from './store'
+import "./index.css";
 
-import {MessageList} from "./components/MessageList/MessageList";
-import {Form} from "./components/Form/Form";
-import {useEffect, useState} from "react";
+import { NavBar } from './components/NavBar/NavBar'
+import { MainPage } from "./Pages/MainPage";
+import { ChatsPage } from "./Pages/ChatsPage/ChatsPage";
+import { ProfilePage } from "./Pages/ProfilePage";
+import { ChatList } from "./components/ChatList/ChatList";
+
+import { ThemeProvider } from "styled-components";
+import { darkTheme, lightTheme, GlobalStyles,ThemeContext } from "./theme";
+import {NewsPage} from "./Pages/NewsPage";
+import {SingIn} from "./Pages/SingIn";
+import {SignUp} from "./Pages/SignUp";
+import {PrivateRoute} from "./authRoute/PriviteRoute";
+import {firebaseAuth} from "./services/firebase";
+import {auth} from "./store/profile/actions";
+import {PublicRoute} from "./authRoute/PublicRoute";
+
 
 
 export function App() {
-    const [messages, setMessages] = useState([])
+    const dispatch = useDispatch()
+    //тема
+    const [theme, setTheme] = useState(lightTheme.theme)
+    const switchTheme = () => {
+        theme === "light" ? setTheme("dark") : setTheme("light");
+    };
 
-    const addMessage = (newMessage) => {
-        setMessages([...messages, newMessage])
-    }
-    useEffect(()=>{
-        if (messages.length > 0 && messages[messages.length -1].author === 'Me') {
-           const timeout = setTimeout(() => {
-                addMessage({
-                    author: 'bot',
-                    text: 'Im Bot'
-                })
-            }, 1500)
-            return() => {
-                clearTimeout(timeout)
+    useEffect(() => {
+        const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
+            if (user) {
+                dispatch(auth(true))
+            } else {
+                dispatch(auth(false))
             }
-        }
+        })
+        return unsubscribe
+    }, [dispatch])
 
-    },[messages])
-
-
+// index в route означает, что при главном урле отрисуется MainPage
     return (
+        <ThemeProvider value={{
+            theme,
+            switchTheme
+        }} theme={theme === "light" ? lightTheme : darkTheme}>
+            <GlobalStyles />
         <>
-            <h1 style={{color: 'darkgreen'}}>Welcome to chat!!!</h1>
-            <Form addMessage={addMessage}/>
-            <MessageList messages={messages}/>
+                <PersistGate persistor={persistor}>
+                    <ThemeContext.Provider value={{
+                        theme,
+                        switchTheme
+                    }}>
+            <Routes>
+                <Route  path='/' element={<NavBar switchTheme={switchTheme} />} >
+                    <Route index element={<MainPage />}  />
+                    <Route path="profile" element={<ProfilePage />} />
+                    <Route path="news" element={<NewsPage />} />
+                    <Route path="login" element={<PublicRoute component={<SingIn />} />} />
+                    <Route path="logout" element={<SignUp />} />
+                    <Route path="chats" element={<PrivateRoute />}>
+                        <Route
+                            index
+                            element={<ChatList/>}
+                        />
+                        <Route
+                            path=":chatId"
+                            element={<ChatsPage />}
+                        />
+                    </Route>
+                </Route>
+                <Route path="*" element={<h2>404 Page not FOUND</h2>} />
+            </Routes>
+                    </ThemeContext.Provider>
+                </PersistGate>
         </>
+        </ThemeProvider>
     )
 }
-
-
