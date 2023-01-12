@@ -9,11 +9,10 @@ import { NavBar } from './components/NavBar/NavBar'
 import { MainPage } from "./Pages/MainPage";
 import { ChatsPage } from "./Pages/ChatsPage/ChatsPage";
 import { ProfilePage } from "./Pages/ProfilePage";
-import { AboutWithConnect } from "./Pages/AboutPage";
 import { ChatList } from "./components/ChatList/ChatList";
 
 import { ThemeProvider } from "styled-components";
-import { darkTheme, lightTheme, GlobalStyles } from "./theme";
+import { darkTheme, lightTheme, GlobalStyles,ThemeContext } from "./theme";
 import {NewsPage} from "./Pages/NewsPage";
 import {SingIn} from "./Pages/SingIn";
 import {SignUp} from "./Pages/SignUp";
@@ -27,7 +26,7 @@ import {PublicRoute} from "./authRoute/PublicRoute";
 export function App() {
     const dispatch = useDispatch()
     //тема
-    const [theme, setTheme] = useState("light");
+    const [theme, setTheme] = useState(lightTheme.theme)
     const switchTheme = () => {
         theme === "light" ? setTheme("dark") : setTheme("light");
     };
@@ -45,17 +44,22 @@ export function App() {
 
 // index в route означает, что при главном урле отрисуется MainPage
     return (
-        <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+        <ThemeProvider value={{
+            theme,
+            switchTheme
+        }} theme={theme === "light" ? lightTheme : darkTheme}>
             <GlobalStyles />
         <>
                 <PersistGate persistor={persistor}>
-
+                    <ThemeContext.Provider value={{
+                        theme,
+                        switchTheme
+                    }}>
             <Routes>
                 <Route  path='/' element={<NavBar switchTheme={switchTheme} />} >
                     <Route index element={<MainPage />}  />
                     <Route path="profile" element={<ProfilePage />} />
                     <Route path="news" element={<NewsPage />} />
-                    <Route path="about" element={<AboutWithConnect />} />
                     <Route path="login" element={<PublicRoute component={<SingIn />} />} />
                     <Route path="logout" element={<SignUp />} />
                     <Route path="chats" element={<PrivateRoute />}>
@@ -71,6 +75,7 @@ export function App() {
                 </Route>
                 <Route path="*" element={<h2>404 Page not FOUND</h2>} />
             </Routes>
+                    </ThemeContext.Provider>
                 </PersistGate>
         </>
         </ThemeProvider>

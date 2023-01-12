@@ -7,6 +7,8 @@ import { useSelector } from "react-redux"; // иморт для того что�
 import {logOut} from "../../services/firebase";
 import Button from "@mui/material/Button";
 import UIButton from "@mui/material/Button";
+import {useContext} from "react";
+import {ThemeContext} from "../../theme";
 
 export const navigates = [
     {
@@ -24,11 +26,11 @@ export const navigates = [
         name: 'Profile',
         to: '/profile'
     },
-    {
-        id:4,
-        name: 'About',
-        to: '/about'
-    },
+    // {
+    //     id:4,
+    //     name: 'About',
+    //     to: '/about'
+    // },
     {
         id:5,
         name: 'News',
@@ -37,9 +39,9 @@ export const navigates = [
 
 ]
 
-export function NavBar({switchTheme}) {
+export function NavBar() {
     const navigate = useNavigate()
-
+    const { theme, switchTheme } = useContext(ThemeContext)
     const name = useSelector((store) => store.profile.name)
     const isAuth = useSelector((store) => store.profile.isAuth)
 
@@ -71,20 +73,24 @@ export function NavBar({switchTheme}) {
                             </li>
                         ))}
                     </ul>
-                    {!isAuth && (
-                        <>
-                            <Button onClick={handleLogin}>login</Button>
-                            <Button onClick={handleSignUp}>sing up</Button>
-                        </>
-                    )}
+
+                    <UIButton onClick={switchTheme}
+                    >Switch<p>{theme === 'light' ? '🌞' : '🌙'}</p>
+                    </UIButton>
+                    <p>user: {name}</p>
+                    <div  className={styles.leftbar}>
                     {isAuth && (
                         <>
                             <Button onClick={handleLogout}>logout</Button>
                         </>
                     )}
-                    <p>user: {name}</p>
-                    <p>'🌞' : '🌙'</p>
-                    <UIButton onClick={switchTheme}>Switch theme</UIButton>
+                        {!isAuth && (
+                            <>
+                                <Button onClick={handleLogin}>login</Button>
+                                <Button onClick={handleSignUp}>registration</Button>
+                            </>
+                        )}
+                </div>
                 </nav>
             </header>
             <main>

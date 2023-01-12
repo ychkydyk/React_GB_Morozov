@@ -2,14 +2,16 @@ import {createGlobalStyle} from "styled-components"
 import React from 'react'
 
 export const darkTheme = {
+    theme: 'dark',
     body: "#6c4698",
     textColor: "#fff",
     headingColor: "lightblue",
-    navbarColor: "lightblue",
+    navbarColor: " #282c34",
     iconText: "🌙"
 }
 
 export const lightTheme = {
+    theme: 'light',
     body: "lightblue",
     textColor: "#000",
     headingColor: "#6c4698",
@@ -31,4 +33,4 @@ export const GlobalStyles = createGlobalStyle`
  background-color: ${props => props.theme.navbarColor};
  }
 `
-export const ThemeContext = React.createContext(darkTheme)
+export const ThemeContext = React.createContext(lightTheme)
