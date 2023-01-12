@@ -39,7 +39,7 @@ export function NewsPage() {
 
     return (
         <>
-            <h1>News</h1>
+            <h1 >News</h1>
             <Button
                 variant="contained"
                 color="success"

@@ -35,7 +35,7 @@ export function SingIn() {
 
   return (
       <>
-        <div>Login</div>
+        <h1>Login</h1>
         <form onSubmit={handleSubmit}>
           <p>Email:</p>
           <input

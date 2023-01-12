@@ -23,3 +23,8 @@ ul li {
 .header {
   max-width: 100%;
 }
+
+h1 {
+  display: flex;
+  justify-content: center;
+}
