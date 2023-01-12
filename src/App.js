@@ -21,13 +21,14 @@ import {SignUp} from "./Pages/SignUp";
 import {PrivateRoute} from "./authRoute/PriviteRoute";
 import {firebaseAuth} from "./services/firebase";
 import {auth} from "./store/profile/actions";
+import {PublicRoute} from "./authRoute/PublicRoute";
 
 
 
 export function App() {
     const dispatch = useDispatch()
     //тема
-    const [theme, setTheme] = useState("light"); // usestate принимакт начальное состояние state
+    const [theme, setTheme] = useState("light"); // usestate принимает начальное состояние state
     const switchTheme = () => {
         theme === "light" ? setTheme("dark") : setTheme("light");
     };
@@ -41,23 +42,22 @@ export function App() {
             }
         })
         return unsubscribe
-    }, [])
+    }, [dispatch])
 
-// index в route означает, что при гравно урле отрисуется MainPage
+// index в route означает, что при главном урле отрисуется MainPage
     return (
         <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
             <GlobalStyles />
         <>
-
                 <PersistGate persistor={persistor}>
-            <UIButton onClick={switchTheme}>Switch Theme</UIButton>
+
             <Routes>
                 <Route path='/' element={<NavBar />} >
                     <Route index element={<MainPage />}  />
                     <Route path="profile" element={<ProfilePage />} />
                     <Route path="news" element={<NewsPage />} />
                     <Route path="about" element={<AboutWithConnect />} />
-                    <Route path="login" element={<SingIn />} />
+                    <Route path="login" element={<PublicRoute component={<SingIn />} />} />
                     <Route path="logout" element={<SignUp />} />
                     <Route path="chats" element={<PrivateRoute />}>
                         <Route
@@ -69,16 +69,11 @@ export function App() {
                             element={<ChatsPage />}
                         />
                     </Route>
-                    {/*<Route path="chats">*/}
-                    {/*    <Route index element={<ChatList  />} />*/}
-                    {/*    <Route path=":chatId" element={<ChatsPage />}*/}
-                    {/*    />*/}
-                    {/*</Route>*/}
                 </Route>
                 <Route path="*" element={<h2>404 Page not FOUND</h2>} />
             </Routes>
                 </PersistGate>
-
+            <UIButton onClick={switchTheme}>Switch Theme</UIButton>
         </>
         </ThemeProvider>
     )

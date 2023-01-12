@@ -1,9 +1,13 @@
-
+import PropTypes from 'prop-types'
 
 export function Button(props) {
-    return ( //* в children всё что помещается между тегами в родителе *//
+    return (
         <>
-            <button{...props}>{props.children}</button>
+            <button {...props} style={{color: 'green'}} >{props.children}</button>
         </>
     )
+}
+
+Button.propTypes = {
+    type: PropTypes.string
 }

@@ -4,8 +4,8 @@ import * as React from "react";
 import {Outlet, NavLink, useNavigate} from "react-router-dom";
 import { useSelector } from "react-redux"; // иморт для того чтобы вытащить данные ищ Redux State
 
-
 import {logOut} from "../../services/firebase";
+import Button from "@mui/material/Button";
 
 export const navigates = [
     {
@@ -33,23 +33,12 @@ export const navigates = [
         name: 'News',
         to: '/news'
     },
-    // {
-    //     id: 6,
-    //     name: 'login',
-    //     to: '/login'
-    // },
-    // {
-    //     id: 7,
-    //     name: 'logout',
-    //     to: '/logout'
-    // },
+
 ]
 
 export function NavBar() {
     const navigate = useNavigate()
 
-    // const name = useSelector(selectName())
-    // const isAuth = useSelector(selectAuth())
     const name = useSelector((store) => store.profile.name)
     const isAuth = useSelector((store) => store.profile.isAuth)
 
@@ -73,7 +62,7 @@ export function NavBar() {
                                 <NavLink
                                     to={link.to}
                                     style={({ isActive }) => ({
-                                        color: isActive ? 'green' : 'blue'
+                                        color: isActive ? 'green' : 'black'
                                     })}
                                 >
                                     {link.name}
@@ -83,16 +72,16 @@ export function NavBar() {
                     </ul>
                     {!isAuth && (
                         <>
-                            <button onClick={handleLogin}>login</button>
-                            <button onClick={handleSignUp}>sing up</button>
+                            <Button onClick={handleLogin}>login</Button>
+                            <Button onClick={handleSignUp}>sing up</Button>
                         </>
                     )}
                     {isAuth && (
                         <>
-                            <button onClick={handleLogout}>logout</button>
+                            <Button onClick={handleLogout}>logout</Button>
                         </>
                     )}
-                    <p>{name}</p>
+                    <p>user: {name}</p>
                 </nav>
             </header>
             <main>

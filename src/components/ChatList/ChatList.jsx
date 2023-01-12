@@ -5,6 +5,8 @@ import UIButton from "@mui/material/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {addChat, deleteChat} from '../../store/messages/actions'
 import {selectChat} from "../../store/messages/selectors";
+import {Button} from "../ui/Button";
+
 
 export function ChatList({onAddChat}) {
     const [value, setValue] = useState('')
@@ -25,7 +27,7 @@ export function ChatList({onAddChat}) {
                         <Link to={`/chats/${chat.name}`}>
                             {chat.name}
                         </Link>
-                        <button onClick={()=>dispatch(deleteChat(chat.name))}>x</button>
+                        <Button onClick={()=>dispatch(deleteChat(chat.name))}>x</Button>
                     </li>
                     ))}
 

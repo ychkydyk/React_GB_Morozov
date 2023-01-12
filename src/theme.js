@@ -1,15 +1,17 @@
 import {createGlobalStyle} from "styled-components"
 
 export const darkTheme = {
-    body: "#000",
+    body: "#6c4698",
     textColor: "#fff",
-    headingColor: "lightblue"
+    headingColor: "lightblue",
+    navbarColor: "lightblue"
 }
 
 export const lightTheme = {
-    body: "#fff",
+    body: "lightblue",
     textColor: "#000",
-    headingColor: "#d23669",
+    headingColor: "#6c4698",
+    navbarColor: "#6c4698"
 
 }
 
@@ -22,8 +24,9 @@ export const GlobalStyles = createGlobalStyle`
  h1{
    color: ${props => props.theme.headingColor};
  }
- button {
- background: ${props => props.theme.body};
- color: ${props => props.theme.textColor};
+ 
+ header {
+ background-color: ${props => props.theme.navbarColor};
  }
+  
 `

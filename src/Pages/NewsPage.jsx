@@ -39,7 +39,7 @@ export function NewsPage() {
 
     return (
         <>
-            <div>Articles</div>
+            <h1>News</h1>
             <Button
                 variant="contained"
                 color="success"
@@ -53,20 +53,21 @@ export function NewsPage() {
                 </Box>
             )}
             {!loading && articles.map((article) => (
-                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                    <Card sx={{ maxWidth: 345 }} key={article.id}>
+                <Box sx={{ display: 'flex', justifyContent: 'center' }} key={article.id}>
+                    <Card sx={{ maxWidth: 345 }}  >
                         <CardActionArea>
                             <CardMedia
                                 component="img"
                                 height="140"
                                 image={article.imageUrl}
                                 alt="green iguana"
+
                             />
                             <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
+                                <Typography  gutterBottom variant="h5" component="div">
                                     {article.title}
                                 </Typography>
-                                <Typography variant="body2" color="text.secondary">
+                                <Typography  variant="body2" color="text.secondary">
                                     {article.summary}
                                 </Typography>
                             </CardContent>
